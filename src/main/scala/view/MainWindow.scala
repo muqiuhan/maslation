@@ -1,14 +1,15 @@
 package view
 
-import com.formdev.flatlaf.util.SystemInfo
+import scala.swing.event.{Key, KeyPressed, KeyReleased}
+import scala.swing.{Component, FlowPanel, Frame, GridPanel}
 
-import javax.swing.{JDialog, JFrame}
-import scala.swing.{FlowPanel, Frame}
+class MainWindow(config: model.Config, origin: String, translation: String)
+    extends Frame:
 
-class MainWindow(origin: String, translation: String) extends Frame:
+  contents = new GridPanel(1, 2):
+    contents += TextArea(origin)
+    contents += TextArea(origin)
 
-  title = "maslation"
+  title = s"maslation (${config.sourceLang} -> ${config.targetLang})"
   location = update.CursorPosition()
-
-  contents = new FlowPanel:
-    contents += OriginTextArea(origin)
+  resizable = false
