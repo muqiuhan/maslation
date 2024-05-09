@@ -1,9 +1,5 @@
 package update
 
-import java.io.{BufferedReader, InputStreamReader}
-import java.util
-import java.util.stream.Collectors
-
 trait Translater(source: String, config: model.Config):
   def translate(): String
 
@@ -16,10 +12,10 @@ object Translater:
 case class TranslateShell(source: String, config: model.Config)
     extends Translater(source, config):
 
-  private val preprocessedSource = PDFInputPreprocessor(source)
+  private val preprocessedSource = helper.PDFInputPreprocessor(source)
 
   def translate(): String =
-    PDFOutputPreprocessor(
+    helper.PDFOutputPreprocessor(
       helper.CommandExecutor(
         Array(
           "trans",
