@@ -1,25 +1,42 @@
-import com.formdev.flatlaf.FlatLightLaf
 import com.formdev.flatlaf.util.SystemInfo
 import helper.Selection
 import view.MainWindow
 
 import javax.swing.{JDialog, JFrame, UIManager}
 import java.awt.Insets
+import model.Theme
+import com.formdev.flatlaf.themes.FlatMacDarkLaf
+import com.formdev.flatlaf.FlatDarkLaf
+import com.formdev.flatlaf.themes.FlatMacLightLaf
+import com.formdev.flatlaf.FlatLightLaf
 
-@main def hello(): Unit =
-  FlatLightLaf.setup()
+object Main:
+  val config = model.Config.DEFAULT
+
+  // Initialize properties
   UIManager.put("TextArea.margin", Insets(10, 10, 10, 10))
   UIManager.put("TextComponent.arc", 5)
   System.setProperty("flatlaf.animation", "true")
   System.setProperty("flatlaf.updateUIOnSystemFontChange", "true")
 
-  // Enable custom window decorations
+  // Enable custom window decorations on linux
   if SystemInfo.isLinux then
     JFrame.setDefaultLookAndFeelDecorated(true)
     JDialog.setDefaultLookAndFeelDecorated(true)
 
-  val source = Selection()
-  val target = update.Translater(source, model.Config.DEFAULT)
-  MainWindow(model.Config.DEFAULT, source, target)
-    .pack()
-    .open()
+  // Initialize theme
+  config.theme match
+    case Theme.Dark =>
+      if SystemInfo.isMacOS then FlatMacDarkLaf.setup()
+      else FlatDarkLaf.setup()
+    case Theme.Light =>
+      if SystemInfo.isMacOS then FlatMacLightLaf.setup()
+      else FlatLightLaf.setup()
+
+  @main def hello(): Unit =
+    val source = Selection()
+    val target = update.Translater(source, model.Config.DEFAULT)
+
+    MainWindow(config, source, target)
+      .pack()
+      .open()
