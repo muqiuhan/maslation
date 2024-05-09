@@ -1,4 +1,4 @@
-package update
+package com.muqiuhan.maslation.update
 
 import java.awt.Point
 import java.awt.MouseInfo

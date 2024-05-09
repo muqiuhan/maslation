@@ -1,4 +1,4 @@
-package helper
+package com.muqiuhan.maslation.helper
 
 import java.io.{BufferedReader, InputStreamReader, Closeable, IOException}
 import java.util.stream.Collectors

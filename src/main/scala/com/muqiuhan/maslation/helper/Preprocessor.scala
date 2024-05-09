@@ -1,4 +1,4 @@
-package helper
+package com.muqiuhan.maslation.helper
 
 trait Preprocessor:
   def apply(source: String): String

@@ -1,4 +1,7 @@
-package update
+package com.muqiuhan.maslation.update
+
+import com.muqiuhan.maslation.model
+import com.muqiuhan.maslation.helper
 
 trait Translater(source: String, config: model.Config):
   def translate(): String

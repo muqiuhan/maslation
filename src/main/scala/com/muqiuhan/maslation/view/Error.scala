@@ -1,4 +1,4 @@
-package view
+package com.muqiuhan.maslation.view
 
 import scala.swing.Dialog
 import scala.swing.GridPanel

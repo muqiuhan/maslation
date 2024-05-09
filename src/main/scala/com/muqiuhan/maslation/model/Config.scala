@@ -1,4 +1,4 @@
-package model
+package com.muqiuhan.maslation.model
 
 case class Config(
     sourceLang: Lang,

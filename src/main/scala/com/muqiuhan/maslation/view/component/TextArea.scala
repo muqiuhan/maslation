@@ -1,4 +1,4 @@
-package view.component
+package com.muqiuhan.maslation.view.component
 
 import com.formdev.flatlaf.ui.FlatBorder
 

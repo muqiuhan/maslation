@@ -1,3 +1,10 @@
+package com.muqiuhan.maslation.Main
+
+import com.muqiuhan.maslation.model
+import com.muqiuhan.maslation.helper
+import com.muqiuhan.maslation.view
+import com.muqiuhan.maslation.update
+
 import com.formdev.flatlaf.util.SystemInfo
 import helper.Selection
 import view.MainWindow
@@ -18,6 +25,7 @@ object Main:
   UIManager.put("TextComponent.arc", 5)
   System.setProperty("flatlaf.animation", "true")
   System.setProperty("flatlaf.updateUIOnSystemFontChange", "true")
+  System.setProperty("flatlaf.menuBarEmbedded", "true")
 
   // Enable custom window decorations on linux
   if SystemInfo.isLinux then

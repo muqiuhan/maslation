@@ -1,4 +1,4 @@
-package helper
+package com.muqiuhan.maslation.helper
 
 import java.awt.Toolkit
 import java.awt.datatransfer.DataFlavor
