@@ -2,7 +2,7 @@ package com.muqiuhan.maslation
 
 import com.formdev.flatlaf.util.SystemInfo
 import helper.Selection
-import view.MainWindow
+import view.{MainWindow, Tray}
 
 import javax.swing.{JDialog, JFrame, UIManager}
 import java.awt.Insets
@@ -13,6 +13,8 @@ import com.formdev.flatlaf.themes.FlatMacLightLaf
 import com.formdev.flatlaf.FlatLightLaf
 import com.github.kwhat.jnativehook.GlobalScreen
 import com.github.kwhat.jnativehook.keyboard.{NativeKeyEvent, NativeKeyListener}
+
+import java.util.Scanner
 
 object Main:
   private val config = model.Config.DEFAULT
@@ -40,11 +42,16 @@ object Main:
 
     MainWindow(config, source, target).pack().open()
 
-  @main def main(): Unit =
-    exec()
-    GlobalScreen.registerNativeHook()
-    GlobalScreen.addNativeKeyListener(new NativeKeyListener:
-      override def nativeKeyPressed(nativeEvent: NativeKeyEvent): Unit =
-        if nativeEvent.getKeyCode == NativeKeyEvent.VC_T then
-          exec()
-    )
+  @main
+  def main(): Unit =
+    try
+      Tray()
+      GlobalScreen.registerNativeHook()
+      GlobalScreen.addNativeKeyListener(
+        new NativeKeyListener:
+          override def nativeKeyPressed(nativeEvent: NativeKeyEvent): Unit =
+            if nativeEvent.getKeyCode == NativeKeyEvent.VC_T then exec()
+      )
+
+      new Scanner(System.in).next()
+    catch case e: Exception => view.Error(e.getMessage, Some(view.Error.stackTraceElementsToString(e)))

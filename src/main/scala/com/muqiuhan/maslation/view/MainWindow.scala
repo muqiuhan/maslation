@@ -19,3 +19,4 @@ class MainWindow(config: model.Config, origin: String, translation: String) exte
   title = s"maslation (${config.sourceLang} -> ${config.targetLang})"
   location = update.CursorPosition()
   resizable = true
+  visible = true
