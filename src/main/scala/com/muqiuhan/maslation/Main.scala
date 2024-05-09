@@ -1,10 +1,5 @@
 package com.muqiuhan.maslation
 
-import com.muqiuhan.maslation.model
-import com.muqiuhan.maslation.helper
-import com.muqiuhan.maslation.view
-import com.muqiuhan.maslation.update
-
 import com.formdev.flatlaf.util.SystemInfo
 import helper.Selection
 import view.MainWindow
@@ -16,6 +11,8 @@ import com.formdev.flatlaf.themes.FlatMacDarkLaf
 import com.formdev.flatlaf.FlatDarkLaf
 import com.formdev.flatlaf.themes.FlatMacLightLaf
 import com.formdev.flatlaf.FlatLightLaf
+import com.github.kwhat.jnativehook.GlobalScreen
+import com.github.kwhat.jnativehook.keyboard.{NativeKeyEvent, NativeKeyListener}
 
 object Main:
   private val config = model.Config.DEFAULT
@@ -34,17 +31,20 @@ object Main:
 
   // Initialize theme
   config.theme match
-    case Theme.Dark =>
-      if SystemInfo.isMacOS then FlatMacDarkLaf.setup()
-      else FlatDarkLaf.setup()
-    case Theme.Light =>
-      if SystemInfo.isMacOS then FlatMacLightLaf.setup()
-      else FlatLightLaf.setup()
+    case Theme.Dark => if SystemInfo.isMacOS then FlatMacDarkLaf.setup() else FlatDarkLaf.setup()
+    case Theme.Light => if SystemInfo.isMacOS then FlatMacLightLaf.setup() else FlatLightLaf.setup()
 
-  @main def hello(): Unit =
+  private def exec(): Unit =
     val source = Selection()
     val target = update.Translater(source, model.Config.DEFAULT)
 
-    MainWindow(config, source, target)
-      .pack()
-      .open()
+    MainWindow(config, source, target).pack().open()
+
+  @main def main(): Unit =
+    exec()
+    GlobalScreen.registerNativeHook()
+    GlobalScreen.addNativeKeyListener(new NativeKeyListener:
+      override def nativeKeyPressed(nativeEvent: NativeKeyEvent): Unit =
+        if nativeEvent.getKeyCode == NativeKeyEvent.VC_T then
+          exec()
+    )

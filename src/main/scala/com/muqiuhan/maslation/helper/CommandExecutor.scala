@@ -14,9 +14,7 @@ object CommandExecutor:
       process = Runtime.getRuntime.exec(cmd)
       process.waitFor()
 
-      bufferIn = new BufferedReader(
-        new InputStreamReader(process.getInputStream)
-      )
+      bufferIn = new BufferedReader(new InputStreamReader(process.getInputStream))
 
       bufferIn.lines().collect(Collectors.joining("\n"))
 
