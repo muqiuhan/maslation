@@ -5,7 +5,7 @@ trait Preprocessor:
 
 object PDFInputPreprocessor extends Preprocessor:
 
-  override def apply(source: String): String =
+  def apply(source: String): String =
     source
       .replaceAll("-\\R", "")
       .replaceAll("\\R", "")
@@ -13,8 +13,9 @@ object PDFInputPreprocessor extends Preprocessor:
 
 object PDFOutputPreprocessor extends Preprocessor:
 
-  override def apply(source: String): String =
+  def apply(source: String): String =
     println(source)
     source
+      .replaceAll("\\R", "")
       .replaceAll("。", "。\n")
       .replaceAll("\\.", ".\n")

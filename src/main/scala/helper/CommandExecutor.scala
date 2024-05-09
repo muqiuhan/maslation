@@ -17,6 +17,7 @@ object CommandExecutor:
       bufferIn = new BufferedReader(
         new InputStreamReader(process.getInputStream)
       )
+
       bufferIn.lines().collect(Collectors.joining("\n"))
 
     finally
