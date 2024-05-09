@@ -16,9 +16,18 @@ object Translater:
 case class TranslateShell(source: String, config: model.Config)
     extends Translater(source, config):
 
-  private val preprocessedSource = PaperPreprocessor(source)
+  private val preprocessedSource = PDFInputPreprocessor(source)
 
   def translate(): String =
-    helper.CommandExecutor(
-      s"trans -no-ansi -no-theme :zh \"$preprocessedSource\""
+    PDFOutputPreprocessor(
+      helper.CommandExecutor(
+        Array(
+          "trans",
+          "--brief",
+          "-no-ansi",
+          "-no-theme",
+          ":zh",
+          preprocessedSource
+        )
+      )
     )

@@ -11,7 +11,7 @@ import java.awt.Insets
   UIManager.put("TextArea.margin", Insets(10, 10, 10, 10))
   UIManager.put("TextComponent.arc", 5)
   System.setProperty("flatlaf.animation", "true")
-  System.setProperty("flatlaf.updateUIOn­SystemFontChange", "true")
+  System.setProperty("flatlaf.updateUIOnSystemFontChange", "true")
 
   // Enable custom window decorations
   if SystemInfo.isLinux then
