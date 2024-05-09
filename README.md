@@ -7,10 +7,13 @@
 
 - ![./resources](./resources/screenshot.png)
 
-
-- ## Features
+- ## TODO
   - [x] [translate-shell](https://github.com/soimort/translate-shell)
+  - [x] System tray
+  - [x] Hotkey
+  - [ ] Custom config
   - [ ] Network API
+  - [ ] Multiple translation sources
   - [ ] Refactor messy code
 
 - ## Dependencies
@@ -18,7 +21,8 @@
     libraryDependencies ++= Seq(
       "org.scalameta" %% "munit" % "0.7.29" % Test,
       "org.scala-lang.modules" %% "scala-swing" % "3.0.0",
-      "com.formdev" % "flatlaf" % "3.4.1"
+      "com.formdev" % "flatlaf" % "3.4.1",
+      "com.github.kwhat" % "jnativehook" % "2.2.2"
     )
     ```
 
