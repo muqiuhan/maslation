@@ -1,13 +1,13 @@
-import java.awt.MouseInfo
-import java.awt.Point
-import scala.swing._
+import com.formdev.flatlaf.FlatLightLaf
+
+import scala.swing.*
 
 @main def hello(): Unit =
+  FlatLightLaf.setup()
+
   new Frame:
     title = "Hello world"
-    location =
-      val location = MouseInfo.getPointerInfo.getLocation
-      Point(location.x, location.y)
+    location = helper.CursorPosition()
 
     contents = new FlowPanel:
       contents += new Label("Launch rainbows:")
