@@ -5,7 +5,7 @@ import java.awt.event.{ActionEvent, ActionListener, MouseAdapter, MouseEvent}
 import scala.swing.Frame
 
 class Tray extends Frame:
-  visible = true
+  visible = false
 
   // Initialize the system tray
   if !SystemTray.isSupported then Error("System tray is not supported")
