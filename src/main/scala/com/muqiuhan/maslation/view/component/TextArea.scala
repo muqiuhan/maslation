@@ -12,7 +12,7 @@ class TextArea(text: String, color: Option[Color] = None) extends swing.TextArea
     case None        => ()
     case Some(color) => foreground = color
 
-  maximumSize = Dimension(columns, rows)
   editable = false
-
+  lineWrap = true
+  wordWrap = true
   border = FlatBorder()
