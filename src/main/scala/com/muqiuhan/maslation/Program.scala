@@ -16,7 +16,7 @@ import com.github.kwhat.jnativehook.keyboard.{NativeKeyEvent, NativeKeyListener}
 
 import java.util.Scanner
 
-object Main:
+object Program:
   private val config = model.Config.DEFAULT
 
   // Initialize properties
@@ -33,7 +33,7 @@ object Main:
 
   // Initialize theme
   config.theme match
-    case Theme.Dark => if SystemInfo.isMacOS then FlatMacDarkLaf.setup() else FlatDarkLaf.setup()
+    case Theme.Dark  => if SystemInfo.isMacOS then FlatMacDarkLaf.setup() else FlatDarkLaf.setup()
     case Theme.Light => if SystemInfo.isMacOS then FlatMacLightLaf.setup() else FlatLightLaf.setup()
 
   private def exec(): Unit =
@@ -50,7 +50,7 @@ object Main:
       GlobalScreen.addNativeKeyListener(
         new NativeKeyListener:
           override def nativeKeyPressed(nativeEvent: NativeKeyEvent): Unit =
-            if nativeEvent.getKeyCode == NativeKeyEvent.VC_T then exec()
+            if nativeEvent.getKeyCode == NativeKeyEvent.VC_F9 then exec()
       )
 
       new Scanner(System.in).next()
