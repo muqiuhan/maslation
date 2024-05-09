@@ -16,6 +16,8 @@ import java.awt.Insets
     JFrame.setDefaultLookAndFeelDecorated(true)
     JDialog.setDefaultLookAndFeelDecorated(true)
 
-  MainWindow(model.Config(), update.Selection(), update.Selection())
+  val source = update.Selection()
+  val target = update.Transaction(source, model.Config.DEFAULT)
+  MainWindow(model.Config.DEFAULT, source, target)
     .pack()
     .open()
