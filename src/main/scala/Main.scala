@@ -17,7 +17,7 @@ import java.awt.Insets
     JDialog.setDefaultLookAndFeelDecorated(true)
 
   val source = update.Selection()
-  val target = update.Transaction(source, model.Config.DEFAULT)
+  val target = update.Translater(source, model.Config.DEFAULT)
   MainWindow(model.Config.DEFAULT, source, target)
     .pack()
     .open()

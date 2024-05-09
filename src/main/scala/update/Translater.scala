@@ -4,17 +4,17 @@ import java.io.{BufferedReader, InputStreamReader}
 import java.util
 import java.util.stream.Collectors
 
-trait Translation(source: String, config: model.Config):
+trait Translater(source: String, config: model.Config):
   def translate(): String
 
-object Transaction:
+object Translater:
   def apply(source: String, config: model.Config): String =
     config.server match
       case model.Server.TranslationShell =>
-        TranslationShell(source, config).translate()
+        TranslateShell(source, config).translate()
 
-case class TranslationShell(source: String, config: model.Config)
-    extends Translation(source, config):
+case class TranslateShell(source: String, config: model.Config)
+    extends Translater(source, config):
   private val preprocessedSource =
     PaperPreprocessor.apply(source)
 
