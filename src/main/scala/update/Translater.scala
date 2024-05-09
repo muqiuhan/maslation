@@ -15,21 +15,10 @@ object Translater:
 
 case class TranslateShell(source: String, config: model.Config)
     extends Translater(source, config):
-  private val preprocessedSource =
-    PaperPreprocessor.apply(source)
+
+  private val preprocessedSource = PaperPreprocessor(source)
 
   def translate(): String =
-    val result = new util.ArrayList[String]()
-    val p = Runtime.getRuntime.exec(
-      Array("trans", ":zh -no-ansi -no-them", preprocessedSource)
+    helper.CommandExecutor(
+      s"trans -no-ansi -no-theme :zh \"$preprocessedSource\""
     )
-    val inputStream = p.getInputStream
-    val reader = new BufferedReader(new InputStreamReader(inputStream))
-    val target = reader.lines.collect(Collectors.joining("\n"))
-
-    p.waitFor()
-    inputStream.close()
-    reader.close()
-    p.destroy()
-
-    target

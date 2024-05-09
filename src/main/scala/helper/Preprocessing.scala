@@ -9,3 +9,4 @@ object PaperPreprocessor extends Preprocessor:
     source
       .replaceAll("-\\R", "")
       .replaceAll("\\R", "")
+      .trim

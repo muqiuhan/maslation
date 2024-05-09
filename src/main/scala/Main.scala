@@ -1,6 +1,8 @@
 import com.formdev.flatlaf.FlatLightLaf
 import com.formdev.flatlaf.util.SystemInfo
+import helper.Selection
 import view.MainWindow
+
 import javax.swing.{JDialog, JFrame, UIManager}
 import java.awt.Insets
 
@@ -16,7 +18,7 @@ import java.awt.Insets
     JFrame.setDefaultLookAndFeelDecorated(true)
     JDialog.setDefaultLookAndFeelDecorated(true)
 
-  val source = update.Selection()
+  val source = Selection()
   val target = update.Translater(source, model.Config.DEFAULT)
   MainWindow(model.Config.DEFAULT, source, target)
     .pack()
