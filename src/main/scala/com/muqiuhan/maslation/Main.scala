@@ -1,4 +1,4 @@
-package com.muqiuhan.maslation.Main
+package com.muqiuhan.maslation
 
 import com.muqiuhan.maslation.model
 import com.muqiuhan.maslation.helper
@@ -18,7 +18,7 @@ import com.formdev.flatlaf.themes.FlatMacLightLaf
 import com.formdev.flatlaf.FlatLightLaf
 
 object Main:
-  val config = model.Config.DEFAULT
+  private val config = model.Config.DEFAULT
 
   // Initialize properties
   UIManager.put("TextArea.margin", Insets(10, 10, 10, 10))

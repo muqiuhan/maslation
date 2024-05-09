@@ -15,7 +15,7 @@ object Error extends Dialog:
       contents += component.TextArea(info, Some(Color.RED))
       contents += component.TextArea(
         exn
-          .getStackTrace()
+          .getStackTrace
           .map(_.toString())
           .reduce((s1: String, s2: String) => s1.concat("\n").concat(s2)),
         Some(Color.GRAY)
