@@ -4,17 +4,17 @@
   - Issues: https://github.com/muqiuhan/maslation/issues
   - Contribution: https://github.com/muqiuhan/maslation/pulls
 
-
 - ![./resources](./resources/screenshot.png)
 
 - ## TODO
   - [x] [translate-shell](https://github.com/soimort/translate-shell)
   - [x] System tray
-  - [x] Hotkey
+  - [x] Hotkey (F9)
   - [ ] Custom config
   - [ ] Network API
   - [ ] Multiple translation sources
   - [ ] Refactor messy code
+  - [ ] Wayland (?)
 
 - ## Dependencies
   - ```scala

@@ -12,28 +12,15 @@ class TextArea(text: String, color: Option[Color] = None)
       new swing.TextArea(
         text,
         rows0 = helper.BestDimension.height(h = text.split("\\R").length),
-        columns0 = helper
-          .BestDimension
-          .width(w =
-            text
-              .split("\\R")
-              .reduceLeft((s1, s2) =>
-                if s1.length > s2.length then
-                  s1
-                else
-                  s2
-              )
-              .length
-          )
+        columns0 = helper.BestDimension
+            .width(w = text.split("\\R").reduceLeft((s1, s2) => if s1.length > s2.length then s1 else s2).length)
       ):
-        color match
-          case None =>
-            ()
-          case Some(color) =>
-            foreground = color
+          color match
+              case None        => ()
+              case Some(color) => foreground = color
 
-        editable = false
-        lineWrap = true
-        wordWrap = true
-        border = FlatBorder()
+          editable = false
+          lineWrap = true
+          wordWrap = true
+          border = FlatBorder()
     )
