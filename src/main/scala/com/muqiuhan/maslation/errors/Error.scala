@@ -24,4 +24,9 @@ trait Error:
             Error.stackTraceElementsToString(e)
         )
     end report
+
+    inline def reportAndExit(e: Throwable, message: String = ""): Nothing =
+        report(e, message)
+        throw e
+
 end Error

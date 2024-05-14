@@ -14,8 +14,6 @@ import com.formdev.flatlaf.FlatLightLaf
 import com.github.kwhat.jnativehook.GlobalScreen
 import com.github.kwhat.jnativehook.keyboard.{NativeKeyEvent, NativeKeyListener}
 
-import java.util.Scanner
-
 enum Error extends errors.Error:
     case Unknown
 
@@ -52,11 +50,9 @@ object Program:
 
     @main
     def main(): Unit =
-        try
-            Tray()
-            update.KeyboardListener(model.Config.DEFAULT.shortcuts, exec).startListener()
-            new Scanner(System.in).next()
+        val keyboardListener = new update.KeyboardListener(model.Config.DEFAULT.shortcuts, exec)
+        try Tray()
         catch case e: Exception => Error.Unknown.report(e)
-        end try
+        finally keyboardListener.close()
     end main
 end Program

@@ -3,6 +3,7 @@ package com.muqiuhan.maslation.view
 import java.awt.{MenuItem, PopupMenu, SystemTray, Toolkit, TrayIcon}
 import java.awt.event.{ActionEvent, ActionListener, MouseAdapter, MouseEvent}
 import scala.swing.Frame
+import java.util.Scanner
 
 class TrayMenu() extends PopupMenu:
 
@@ -34,4 +35,6 @@ class Tray extends Frame:
         tray.setImageAutoSize(true)
         SystemTray.getSystemTray.add(tray)
     end if
+
+    new Scanner(System.in).next()
 end Tray

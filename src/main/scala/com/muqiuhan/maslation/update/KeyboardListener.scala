@@ -15,31 +15,24 @@ class KeyboardListener(_shortcuts: String, callback: () => Unit) extends NativeK
     private val shortcuts = _shortcuts.split("\\+")
     private val status    = collection.mutable.Set[String]()
 
-    def startListener(): Unit =
-        Try(GlobalScreen.registerNativeHook()) match
-            case Success(value) => GlobalScreen.addNativeKeyListener(this)
-            case Failure(e) =>
-                Error.UnsupportKeyboardListener.report(e, "There was a problem registering the keyboard native hook.")
-                System.exit(0)
+    Try(GlobalScreen.registerNativeHook()) match
+        case Success(value) => GlobalScreen.addNativeKeyListener(this)
+        case Failure(e)     => Error.UnsupportKeyboardListener.reportAndExit(e)
 
-    end startListener
-
-    def stopListener(): Unit =
+    def close(): Unit =
         Try(GlobalScreen.unregisterNativeHook()) match
             case Failure(e) =>
                 Error.CannotUnregisterNativeHook.report(e)
                 System.exit(0)
             case _ => ()
-    end stopListener
+    end close
 
     override def nativeKeyPressed(nativeEvent: NativeKeyEvent): Unit =
         status.add(NativeKeyEvent.getKeyText(nativeEvent.getKeyCode()))
         if shortcuts.length == status.size && shortcuts.forall(status.contains(_)) then
             callback()
-        else ()
     end nativeKeyPressed
 
-    override def nativeKeyReleased(nativeEvent: NativeKeyEvent): Unit =
-        status.clear()
+    override def nativeKeyReleased(nativeEvent: NativeKeyEvent): Unit = status.clear()
 
 end KeyboardListener
