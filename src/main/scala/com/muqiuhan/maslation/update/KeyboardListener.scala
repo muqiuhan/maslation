@@ -21,10 +21,8 @@ class KeyboardListener(_shortcuts: String, callback: () => Unit) extends NativeK
 
     def close(): Unit =
         Try(GlobalScreen.unregisterNativeHook()) match
-            case Failure(e) =>
-                Error.CannotUnregisterNativeHook.report(e)
-                System.exit(0)
-            case _ => ()
+            case Failure(e) => Error.CannotUnregisterNativeHook.reportAndExit(e)
+            case _          => ()
     end close
 
     override def nativeKeyPressed(nativeEvent: NativeKeyEvent): Unit =

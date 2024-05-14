@@ -13,12 +13,17 @@ import com.formdev.flatlaf.themes.FlatMacLightLaf
 import com.formdev.flatlaf.FlatLightLaf
 import com.github.kwhat.jnativehook.GlobalScreen
 import com.github.kwhat.jnativehook.keyboard.{NativeKeyEvent, NativeKeyListener}
+import java.awt.SystemTray
 
 enum Error extends errors.Error:
     case Unknown
+    case SystemTrayIsNotSupport
 
 object Program:
     private val config = model.Config.DEFAULT
+
+    // Initialize the system tray
+    if !SystemTray.isSupported then Error.SystemTrayIsNotSupport.reportAndExit(message = "SystemTrayIsNotSupport")
 
     // Initialize properties
     UIManager.put("TextArea.margin", Insets(10, 10, 10, 10))

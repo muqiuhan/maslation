@@ -4,37 +4,30 @@ import java.awt.{MenuItem, PopupMenu, SystemTray, Toolkit, TrayIcon}
 import java.awt.event.{ActionEvent, ActionListener, MouseAdapter, MouseEvent}
 import scala.swing.Frame
 import java.util.Scanner
+import com.formdev.flatlaf.FlatLaf
+import java.awt.Font
+import javax.swing.UIManager
 
-class TrayMenu() extends PopupMenu:
-
-    val exitItem = new MenuItem("exit")
-    exitItem.addActionListener(
-        new ActionListener():
-            override def actionPerformed(e: ActionEvent): Unit = System.exit(0)
+/** NOTE: scala-swing currently does not have TrayIcon or SystemTray available, so the native swing components are used. */
+class TrayMenu extends PopupMenu:
+    add(new MenuItem("exit"):
+        setFont(UIManager.getFont("h4.font"))
+        addActionListener(
+            new ActionListener():
+                override def actionPerformed(e: ActionEvent): Unit = System.exit(0)
+        )
     )
-    this.add(exitItem)
-
 end TrayMenu
 
-class Tray extends Frame:
-    visible = false
-
-    // Initialize the system tray
-    if !SystemTray.isSupported then
-        Error("System tray is not supported")
-    else
-        val tray =
-            new TrayIcon(
-                Toolkit
-                    .getDefaultToolkit
-                    .getImage(classOf[MainWindow].getResource("/logo.png")),
-                "maslation",
-                new TrayMenu()
-            )
-
-        tray.setImageAutoSize(true)
-        SystemTray.getSystemTray.add(tray)
-    end if
-
+class Tray extends TrayIcon(
+        Toolkit
+            .getDefaultToolkit
+            .getImage(classOf[MainWindow]
+                    .getResource("/logo.png")),
+        "maslation",
+        new TrayMenu()
+    ):
+    setImageAutoSize(true)
+    SystemTray.getSystemTray.add(this)
     new Scanner(System.in).next()
 end Tray
