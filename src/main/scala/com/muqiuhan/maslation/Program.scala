@@ -54,14 +54,7 @@ object Program:
     def main(): Unit =
         try
             Tray()
-            GlobalScreen.registerNativeHook()
-            GlobalScreen.addNativeKeyListener(
-                new NativeKeyListener:
-                    override def nativeKeyPressed(nativeEvent: NativeKeyEvent): Unit =
-                        if nativeEvent.getKeyCode == NativeKeyEvent.VC_F9 then
-                            exec()
-            )
-
+            update.KeyboardListener("Shift+F9", exec).startListener()
             new Scanner(System.in).next()
         catch case e: Exception => Error.Unknown.report(e)
         end try

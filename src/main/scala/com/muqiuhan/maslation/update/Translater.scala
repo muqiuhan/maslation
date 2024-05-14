@@ -22,7 +22,7 @@ case class TranslateShell(source: String, config: model.Config) extends Translat
         val lang = config.targetLang match
             case Lang.Chinese => ":zh"
             case Lang.English => ":en"
-        
+
         helper.PDFOutputPreprocessor(
             helper.CommandExecutor(
                 Array("trans", "--brief", "-no-ansi", "-no-theme", lang, preprocessedSource)
