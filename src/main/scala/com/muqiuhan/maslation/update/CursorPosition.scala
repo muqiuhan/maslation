@@ -7,3 +7,4 @@ object CursorPosition:
     def apply(): Point =
         val location = MouseInfo.getPointerInfo.getLocation
         Point(location.x, location.y)
+end CursorPosition

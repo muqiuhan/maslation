@@ -4,8 +4,9 @@ case class Config(sourceLang: Lang, targetLang: Lang, server: Server, theme: The
 
 object Config:
     def DEFAULT: Config = Config(
-      sourceLang = Lang.English,
-      targetLang = Lang.Chinese,
-      server = Server.TranslationShell,
-      theme = Theme.Light
+        sourceLang = Lang.English,
+        targetLang = Lang.Chinese,
+        server = Server.TranslationShell,
+        theme = Theme.Light
     )
+end Config

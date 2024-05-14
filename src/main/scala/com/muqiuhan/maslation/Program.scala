@@ -41,6 +41,7 @@ object Program:
         val target = update.Translater(source, model.Config.DEFAULT)
 
         MainWindow(config, source, target).pack().open()
+    end exec
 
     @main
     def main(): Unit =
@@ -48,10 +49,14 @@ object Program:
             Tray()
             GlobalScreen.registerNativeHook()
             GlobalScreen.addNativeKeyListener(
-              new NativeKeyListener:
-                  override def nativeKeyPressed(nativeEvent: NativeKeyEvent): Unit =
-                      if nativeEvent.getKeyCode == NativeKeyEvent.VC_F9 then exec()
+                new NativeKeyListener:
+                    override def nativeKeyPressed(nativeEvent: NativeKeyEvent): Unit =
+                        if nativeEvent.getKeyCode == NativeKeyEvent.VC_F9 then
+                            exec()
             )
 
             new Scanner(System.in).next()
         catch case e: Exception => view.Error(e.getMessage, Some(view.Error.stackTraceElementsToString(e)))
+        end try
+    end main
+end Program
