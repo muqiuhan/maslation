@@ -54,7 +54,7 @@ object Program:
     def main(): Unit =
         try
             Tray()
-            update.KeyboardListener("Shift+F9", exec).startListener()
+            update.KeyboardListener(model.Config.DEFAULT.shortcuts, exec).startListener()
             new Scanner(System.in).next()
         catch case e: Exception => Error.Unknown.report(e)
         end try
