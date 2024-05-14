@@ -4,24 +4,19 @@ import scala.swing.Dialog
 import java.awt.Color
 import scala.swing.FlowPanel
 
-object Error extends Dialog:
+object ErrorWindow extends Dialog:
     title = s"maslation error"
     resizable = false
     visible = true
 
-    def stackTraceElementsToString(exn: Exception): String = exn
-        .getStackTrace
-        .map(_.toString())
-        .reduce((s1: String, s2: String) => s1.concat("\n").concat(s2))
-
-    def apply(info: String, details: Option[String] = None): Unit =
+    def apply(info: String, details: String): Unit =
         val exn = RuntimeException(info)
         contents =
             new FlowPanel():
                 contents += component.TextArea(info, Some(Color.RED))
                 contents +=
                     component.TextArea(
-                        details.getOrElse(stackTraceElementsToString(exn)),
+                        details,
                         Some(Color.GRAY)
                     )
 
@@ -29,4 +24,4 @@ object Error extends Dialog:
         pack()
         open()
     end apply
-end Error
+end ErrorWindow

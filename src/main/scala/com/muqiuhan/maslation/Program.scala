@@ -16,6 +16,9 @@ import com.github.kwhat.jnativehook.keyboard.{NativeKeyEvent, NativeKeyListener}
 
 import java.util.Scanner
 
+enum Error extends errors.Error:
+    case Unknown
+
 object Program:
     private val config = model.Config.DEFAULT
 
@@ -37,10 +40,14 @@ object Program:
         case Theme.Light => if SystemInfo.isMacOS then FlatMacLightLaf.setup() else FlatLightLaf.setup()
 
     private def exec(): Unit =
-        val source = Selection()
-        val target = update.Translater(source, model.Config.DEFAULT)
-
-        MainWindow(config, source, target).pack().open()
+        Selection().foreach(source =>
+            MainWindow(
+                source = source,
+                target = update.Translater(
+                    source = source
+                )
+            ).pack().open()
+        )
     end exec
 
     @main
@@ -56,7 +63,7 @@ object Program:
             )
 
             new Scanner(System.in).next()
-        catch case e: Exception => view.Error(e.getMessage, Some(view.Error.stackTraceElementsToString(e)))
+        catch case e: Exception => Error.Unknown.report(e)
         end try
     end main
 end Program

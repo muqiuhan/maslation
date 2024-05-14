@@ -17,18 +17,12 @@ object CommandExecutor:
             bufferIn.lines().collect(Collectors.joining("\n"))
         finally
             bufferIn match
-                case null =>
-                    ()
-                case _: BufferedReader =>
-                    bufferIn.close()
-            end match
+                case null              => ()
+                case _: BufferedReader => bufferIn.close()
 
             process match
-                case null =>
-                    ()
-                case process: Process =>
-                    process.destroy()
-            end match
+                case null             => ()
+                case process: Process => process.destroy()
         end try
     end apply
 end CommandExecutor
