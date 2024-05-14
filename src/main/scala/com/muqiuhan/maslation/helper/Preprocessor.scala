@@ -13,7 +13,6 @@ end PDFInputPreprocessor
 
 object PDFOutputPreprocessor extends Preprocessor:
     def apply(source: String): String =
-        println(source)
         source
             .replaceAll("\\R", "")
             .replaceAll("。", "。\n")
